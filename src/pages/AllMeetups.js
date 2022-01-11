@@ -7,27 +7,28 @@ function AllMeetupsPage() {
 
   useEffect(() => {
     setIsLoading(true);
-    fetch('https://react-getting-starting-d0abf-default-rtdb.europe-west1.firebasedatabase.app/meetups.json'
-  ).then(response => {
-    return response.json();
-  }).then(data => {
-    const meetups = [];
-    
-    for (const key in data) {
-      const meetup = {
-        id: key,
-        ...data[key]
-      };
+    fetch(
+      "https://react-getting-starting-d0abf-default-rtdb.europe-west1.firebasedatabase.app/meetups.json"
+    )
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        const meetups = [];
 
-      meetups.push(meetup)
-    }
+        for (const key in data) {
+          const meetup = {
+            id: key,
+            ...data[key],
+          };
 
-    setIsLoading(false);
-    setLoadedMeetups(meetups);
-  });
+          meetups.push(meetup);
+        }
+
+        setIsLoading(false);
+        setLoadedMeetups(meetups);
+      });
   }, []);
-
-  
 
   if (isloading) {
     return (
@@ -40,7 +41,7 @@ function AllMeetupsPage() {
   return (
     <div>
       <h1>All Meetups</h1>
-      <MeetupList meetups={loadedMeetups}/>
+      <MeetupList meetups={loadedMeetups} />
     </div>
   );
 }
